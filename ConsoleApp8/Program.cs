@@ -1,0 +1,26 @@
+﻿using Newtonsoft.Json.Linq;
+using System.IO;
+namespace ConsoleApp8
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+           string text = File.ReadAllText(@"C:\Data\products.json");
+            JObject x = JObject.Parse(text);
+            var y = x.Children().ToArray();
+            var y1 = y[0].Value<JProperty>();
+
+            var items = (JArray)y1.Value;
+            JObject obj = (JObject) items[0];
+            Console.WriteLine(items[0].ToString());
+            
+            foreach (var item in obj.Properties())
+            {
+                Console.WriteLine(item.Name);
+                Console.WriteLine(item.Value);
+            }
+            
+        }
+    }
+}
